@@ -4,16 +4,14 @@ from django.contrib.auth import authenticate, login, logout
 from .forms import LoginForm
 from django.contrib.auth.decorators import login_required
 from .forms import UserRegistrationForm
+from .forms import EvenClub
 from django.contrib.auth import login, authenticate
 from django.contrib import messages
-
 def index(request):
-    return HttpResponse("Première apllication django")
-
+    return HttpResponse("run application")
 @login_required
 def home(request):
-    context={'val':"Menu Acceuil"}
-    return render(request,'home.html',context)
+    return render(request,'home.html')
 def register(request):
     if request.method == 'POST' :
         form = UserRegistrationForm(request.POST)
@@ -30,4 +28,20 @@ def register(request):
     return render(request,'registration/register.html',{'form' : form})
 def logout_view(request):
     logout(request)
-    return redirect('acceuil')   
+    return redirect('index') 
+def choix(request) :
+    return render(request,'choix.html')  
+def eventClub(request):
+    form = EvenClub()
+    context = {'form': form}
+    return render(request,'eventClub.html',context)
+def login(request):
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            return redirect('home')
+    else:
+        form = LoginForm()
+
+    context = {'form': form}
+    return render(request, 'login.html', context)    

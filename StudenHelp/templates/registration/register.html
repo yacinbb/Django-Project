@@ -1,24 +1,26 @@
+{% load crispy_forms_tags %}
 {% block content %}
-<h2>S'inscrire</h2>
-<form method="post">
-{% csrf_token %}
-<table>
-    {% for field in form %}
-<tr>
-<td>{{ field.label_tag }}</td>
-<td>{{ field }}</td>
-</tr>
-{% for error in field.errors %}
-<tr><td></td><td class="alert alert-danger">{{ error }}</td></tr>
-{% endfor %}
-{% endfor %}
-</table>
-<button type="submit">s'inscrire</button>
-</form>
-<div>
-<small>
-Déjà inscrit.e?
-<a href="{% url 'login' %}">Se connecter</a>
-</small>
+<head>
+    <link rel="stylesheet" type="text/css" href="https://bootswatch.com/5/litera/bootstrap.min.css">
+    <style>
+        .container{
+            width: 550px;
+            height: 100px;
+        }
+    </style> 
+</head>
+<div class="container">
+  <h2>S'inscrire</h2>
+  <form method="post" action="{% url 'home' %}">
+    {% csrf_token %}
+    {% crispy form %}  
+    <button type="submit" >S'inscrire</button>
+  </form>
+  <div>
+    <small>
+      Déjà inscrit.e?
+      <a href="{% url 'login' %}">Se connecter</a>
+    </small>
+  </div>
 </div>
 {% endblock %}

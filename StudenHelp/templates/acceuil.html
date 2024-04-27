@@ -116,19 +116,12 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
-                {% if user.is_authenticated %}
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">{{ user.username }},</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="{% url 'logout' %}">Déconnexion</a>                {% else %}
                 <li class="nav-item active">
                     <a class="nav-link" href="{% url 'login' %}">Connexion</a>
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link" href="{% url 'register' %}">Inscription</a>
                 </li>
-                {% endif %}
             </ul>
         </div>
         </div>
