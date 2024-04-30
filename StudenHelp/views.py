@@ -35,13 +35,20 @@ def eventClub(request):
     form = EvenClub()
     context = {'form': form}
     return render(request,'eventClub.html',context)
-def login(request):
+def login_view(request):
     if request.method == 'POST':
-        form = LoginForm(request.POST)
+        form = LoginForm(data=request.POST)
         if form.is_valid():
-            return redirect('home')
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('home')
+            else:
+
+                pass
     else:
         form = LoginForm()
 
-    context = {'form': form}
-    return render(request, 'login.html', context)    
+    return render(request, 'registration/login.html', {'form': form})   

@@ -1,20 +1,22 @@
-{% load crispy_forms_tags %}
-{% block content %}
+{% load crispy_forms_tags %} {% block content %}
 <head>
-    <link rel="stylesheet" type="text/css" href="https://bootswatch.com/5/litera/bootstrap.min.css">
-    <style>
-        .container{
-            width: 550px;
-            height: 100px;
-        }
-    </style> 
+  <link
+    rel="stylesheet"
+    type="text/css"
+    href="https://bootswatch.com/5/litera/bootstrap.min.css"
+  />
+  <style>
+    .container {
+      width: 550px;
+      height: 100px;
+    }
+  </style>
 </head>
 <div class="container">
   <h2>S'inscrire</h2>
-  <form method="post" action="{% url 'home' %}">
-    {% csrf_token %}
-    {% crispy form %}  
-    <button type="submit" >S'inscrire</button>
+  
+    {% csrf_token %} {% crispy form %}
+    
   </form>
   <div>
     <small>

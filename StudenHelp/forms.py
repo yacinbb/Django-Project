@@ -9,16 +9,20 @@ from crispy_forms.layout import Submit
 class LoginForm(forms.Form):
     username = forms.CharField()
     password = forms.CharField(widget=forms.PasswordInput())
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.helper = FormHelper()
-        self.helper.form_method = 'post'
-        self.helper.add_input(Submit('submit', 'Se connecter'))
+    helper = FormHelper()
+    helper.form_method = 'POST'
+    helper.form_class = 'login-form'
+    helper.form_show_labels = False
+    helper.add_input(Submit('submit', 'Se connecter', css_class='btn-primary'))
+
 class UserRegistrationForm(UserCreationForm):
     nom = forms.CharField(label='Prénom')
     prenom = forms.CharField(label='Nom')
     email = forms.EmailField(label='Adresse e-mail')
     telephone = forms.CharField(max_length=20)
+    helper = FormHelper()
+    helper.add_input(Submit('submit', 'Submit', css_class='btn-primary'))
+    helper.form_method = 'POST'
     class Meta(UserCreationForm.Meta):
         model = User
         fields = UserCreationForm.Meta.fields + ('nom', 'prenom' , 'email','telephone') 
