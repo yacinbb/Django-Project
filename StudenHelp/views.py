@@ -9,6 +9,8 @@ from django.contrib.auth import login, authenticate
 from django.contrib import messages
 def index(request):
     return HttpResponse("run application")
+def profile(request) :
+    return render( request ,'profile.html')  
 @login_required
 def home(request):
     return render(request,'home.html')
@@ -50,5 +52,5 @@ def login_view(request):
                 pass
     else:
         form = LoginForm()
-
-    return render(request, 'registration/login.html', {'form': form})   
+    return render(request, 'registration/login.html', {'form': form}) 
+  
