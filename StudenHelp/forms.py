@@ -16,8 +16,8 @@ class LoginForm(forms.Form):
     helper.add_input(Submit('submit', 'Se connecter', css_class='btn-primary'))
 
 class UserRegistrationForm(UserCreationForm):
-    nom = forms.CharField(label='Prénom')
-    prenom = forms.CharField(label='Nom')
+    nom = forms.CharField(max_length=50)
+    prenom = forms.CharField(label='Prenom')
     email = forms.EmailField(label='Adresse e-mail')
     telephone = forms.CharField(max_length=20)
     helper = FormHelper()

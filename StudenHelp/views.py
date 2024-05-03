@@ -15,19 +15,17 @@ def profile(request) :
 def home(request):
     return render(request,'home.html')
 def register(request):
-    if request.method == 'POST' :
+    if request.method == 'POST':
         form = UserRegistrationForm(request.POST)
         if form.is_valid():
             form.save()
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=password)
-            login(request,user)
-            messages.success(request, f'Coucou {username}, Votre compte a été créé avec succès !')
+            user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password1'])
+            login(request, user)
+            messages.success(request, f'Coucou {user.username}, Votre compte a été créé avec succès !')
             return redirect('home')
-    else :
+    else:
         form = UserRegistrationForm()
-    return render(request,'registration/register.html',{'form' : form})
+    return render(request, 'registration/register.html', {'form': form})
 def logout_view(request):
     logout(request)
     return redirect('index') 

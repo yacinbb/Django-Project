@@ -7,8 +7,8 @@ class User(models.Model) :
     prenom = models.CharField(max_length=50),
     telephone = models.CharField(max_length = 50),
     email = models.EmailField(max_length = 50),
-    def __str__(self) :
-        return "nom :"+self.nom+" prenom "+self.prenom+" telephone "+self.telephone+" email "+self.email+" "
+    def __str__(self):
+        return f"nom: {self.nom}, prenom: {self.prenom}, telephone: {self.telephone}, email: {self.email}"
 class Poste(models.Model) :
     image = models.ImageField(blank=True),
     type = models.IntegerField(default=0),
@@ -47,7 +47,6 @@ class Stage(Poste):
     specialite = models.CharField(max_length=255)
     def __str__(self):
         return "Stage - Type:"+ self.typestg +" Société: "+self.societe+" Durée: " +self.duree + " sujet "+self.sujet+" contact info "+self.contactinfo + "specilaiter " +self.specialite    
-    
 # class Evenement  :
 class Evenement(Poste):
     intitule = models.CharField(max_length=255)
