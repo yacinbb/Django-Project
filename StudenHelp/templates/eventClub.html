@@ -1,23 +1,19 @@
+{% extends 'base.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
 <head>
     <link rel="stylesheet" type="text/css" href="https://bootswatch.com/5/litera/bootstrap.min.css">
-
+<style>
+    .container{
+        width: 400px;
+        margin: 0 auto;
+    }
+</style>
 </head>
 <div class="container">
     <h2>eventClub</h2>
-    <!-- <form method="post" action="{% url 'home' %}"> -->
         {% csrf_token %}
         {% crispy form %}
-        <!-- <button type="submit" class="btn btn-primary">Se connecter</button>
-        <br>
-        <small>
-            Pas encore inscrit ?
-            <a href="{% url 'register' %}">S'inscrire</a>
-            <br>
-            Mot de passe oublié ?
-            <a href="{% url 'password_reset' %}">Renouveler mon mot de passe</a>
-        </small>
-    </form> -->
+        
 </div>
 {% endblock %}

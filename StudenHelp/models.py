@@ -10,8 +10,8 @@ class User(models.Model) :
     def __str__(self):
         return f"nom: {self.nom}, prenom: {self.prenom}, telephone: {self.telephone}, email: {self.email}"
 class Poste(models.Model) :
-    image = models.ImageField(blank=True),
-    type = models.IntegerField(default=0),
+    image = models.ImageField(blank=True)
+    type = models.IntegerField(default=0)
     date = models.DateField(default=date.today)
     users = models.ForeignKey(User ,on_delete=models.CASCADE)
     def __str__(self) :
@@ -59,7 +59,7 @@ class Evenement(Poste):
 class EvenClub (Evenement)  :
     club = models.CharField(max_length=255)  
     def __str__(self) :
-        return "club "+self.club+"" 
+        return f"club {self.club}"
 # class EvenSocial :
 class EvenSocial(Evenement) :
     prix = models.FloatField()

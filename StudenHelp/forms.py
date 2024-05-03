@@ -27,18 +27,23 @@ class UserRegistrationForm(UserCreationForm):
         model = User
         fields = UserCreationForm.Meta.fields + ('nom', 'prenom' , 'email','telephone') 
 class Poste(forms.Form):
+    image = forms.ImageField(label='image')
+    type = forms.IntegerField(label='type')
+    date = forms.DateField(label='date')
+    users = forms.ModelChoiceField(queryset=User.objects.all(), label='users')
     class Meta:
         model = Poste
-        fields = "all"           
+        fields = "__all__"           
 class Evenement(Poste) :
     intitule = forms.CharField(label='intitule')
-    description = forms.CharField(label='decription')
+    description = forms.CharField(label='description')
     lieu = forms.CharField(label='lieu')
     contactinfo = forms.CharField(label='Contact ')
     class Meta() :
         model = Evenement
         fields = "__all__"
 class EvenClub(Evenement):
+    club = forms.CharField(label='Club')  
     class Meta() :
         model = EvenClub
         fields = "__all__"
