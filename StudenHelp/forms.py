@@ -6,6 +6,7 @@ from .models import Poste , Evenement,EvenClub
 from django.contrib.auth.forms import UserCreationForm
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
+from .models import Poste
 class LoginForm(forms.Form):
     username = forms.CharField()
     password = forms.CharField(widget=forms.PasswordInput())
@@ -30,10 +31,10 @@ class Poste(forms.Form):
     image = forms.ImageField(label='image')
     type = forms.IntegerField(label='type')
     date = forms.DateField(label='date')
-    users = forms.ModelChoiceField(queryset=User.objects.all(), label='users')
+    # users = forms.ModelChoiceField(queryset=User.objects.all(), label='users')
     class Meta:
         model = Poste
-        fields = "__all__"           
+        fields = ['image' ,'type','date']           
 class Evenement(Poste) :
     intitule = forms.CharField(label='intitule')
     description = forms.CharField(label='description')
@@ -48,4 +49,19 @@ class EvenClub(Evenement):
         model = EvenClub
         fields = "__all__"
 
+# class PosteForm(forms.ModelForm):
+#     image = forms.ImageField(label='image')
+#     type = forms.IntegerField(label='type')
+#     date = forms.DateField(label='date')
+#     class Meta:
+#         model = Poste
+#         fields = ['image', 'type', 'date']
 
+# class EvenementForm(forms.ModelForm):
+#     class Meta:
+#         model = Evenement
+#         fields = '__all__'
+# class EvenClubForm(forms.ModelForm):
+#     class Meta:
+#         model = EvenClub
+        # fields = '__all__'

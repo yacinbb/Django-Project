@@ -7,6 +7,8 @@ from .forms import UserRegistrationForm
 from .forms import EvenClub
 from django.contrib.auth import login, authenticate
 from django.contrib import messages
+from .models import Poste
+from django.views.generic import ListView 
 def index(request):
     return HttpResponse("run application")
 def profile(request) :
@@ -51,4 +53,7 @@ def login_view(request):
     else:
         form = LoginForm()
     return render(request, 'registration/login.html', {'form': form}) 
-  
+# class ListePost(ListView):
+#      model = Poste 
+#      template_name = 'home.html'
+#      context_object_name = 'posts'  
