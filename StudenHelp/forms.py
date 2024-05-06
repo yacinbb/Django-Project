@@ -40,11 +40,17 @@ class Evenement(Poste) :
     description = forms.CharField(label='description')
     lieu = forms.CharField(label='lieu')
     contactinfo = forms.CharField(label='Contact ')
+    helper = FormHelper()
+    helper.add_input(Submit('submit', 'Submit', css_class='btn-primary'))
+    helper.form_method = 'POST'
     class Meta() :
         model = Evenement
         fields = "__all__"
 class EvenClub(Evenement):
-    club = forms.CharField(label='Club')  
+    club = forms.CharField(label='Club')
+    helper = FormHelper()
+    helper.add_input(Submit('submit', 'Submit', css_class='btn-primary'))
+    helper.form_method = 'POST'  
     class Meta() :
         model = EvenClub
         fields = "__all__"
@@ -55,16 +61,25 @@ class Transport(Poste):
     heure_dep = forms.TimeField(label='heure de destination ')
     nbre_sieges = forms.IntegerField(label='nbre siége')
     contactinfo = forms.CharField(label='contactinfo')
+    helper = FormHelper()
+    helper.add_input(Submit('submit', 'Submit', css_class='btn-primary'))
+    helper.form_method = 'POST'
     class Meta():
         model = Transport
         fields = "__all__"
 class Recommandation(Poste):
     text = forms.CharField(label='text')
+    helper = FormHelper()
+    helper.add_input(Submit('submit', 'Submit', css_class='btn-primary'))
+    helper.form_method = 'POST'
     class Meta():
         model = Recommandation
         fields = "__all__"
 class EventSocial(Evenement):
     prix = forms.CharField(label='prix')
+    helper = FormHelper()
+    helper.add_input(Submit('submit', 'Submit', css_class='btn-primary'))
+    helper.form_method = 'POST'
     class Meta():
         model = EvenSocial
         fields = "__all__"
@@ -75,6 +90,9 @@ class Stage(Poste):
     sujet = forms.CharField(label='sujet')
     contactinfo = forms.CharField(label='Contact ')
     duree = forms.IntegerField(label='durée')
+    helper = FormHelper()
+    helper.add_input(Submit('submit', 'Submit', css_class='btn-primary'))
+    helper.form_method = 'POST'
     class Meta():
         model = Stage
         fields = "__all__"   
@@ -82,6 +100,9 @@ class Logement(Poste):
     localisation = forms.CharField(label='localisation')
     description = forms.CharField(label='description')
     contactinfo = forms.CharField(label='contactinfo')
+    helper = FormHelper()
+    helper.add_input(Submit('submit', 'Submit', css_class='btn-primary'))
+    helper.form_method = 'POST'
     class Meta():
         model = Logement
         fields = "__all__"        
