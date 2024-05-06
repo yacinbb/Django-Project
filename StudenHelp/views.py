@@ -8,8 +8,9 @@ from .forms import EvenClub
 from django.contrib.auth import login, authenticate
 from django.contrib import messages
 from .models import Poste
-from django.views.generic import ListView 
-from .forms import EvenClub , EventSocial ,Stage ,Logement ,Transport ,Recommandation
+from .forms import EvenClub , EventSocial ,Stage ,Logement ,Transport ,Recommandation , Poste
+from django.views.generic import ListView , CreateView , DetailView
+from django.urls import reverse_lazy
 def index(request):
     return HttpResponse("run application")
 def profile(request) :
@@ -64,21 +65,23 @@ def recommandation(request):
     form = Recommandation()
     context = {'form': form}
     return render(request, 'recommandation.html', context)
-
-
 def eventSocial(request):
     form = EventSocial()
     context = {'form': form}
     return render(request, 'eventSocial.html', context)
-
-
 def stage(request):
     form = Stage()
     context = {'form': form}
     return render(request, 'Stage.html', context)
-
-
+def post(self, request, *args, **kwargs):
+        form = self.get_form()
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
 def logement(request):
     form = Logement()
     context = {'form': form}
     return render(request, 'logement.html', context)
+
+ 
