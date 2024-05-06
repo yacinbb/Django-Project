@@ -11,5 +11,10 @@ urlpatterns = [
     path('register/', views.register, name='register'),
     path('choix/', views.choix, name='choix'),
     path('eventClub/', views.eventClub, name='eventClub'),
+    path('eventSocial/', views.eventSocial, name='eventSocial'),
+    path('stage/', views.stage, name='stage'),
+    path('logement/', views.logement, name='logement'),
+    path('transport/', views.transport, name='transport'),
+    path('recommandation/', views.recommandation, name='recommandation'),
 
  ]

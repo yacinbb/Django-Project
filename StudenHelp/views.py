@@ -9,6 +9,7 @@ from django.contrib.auth import login, authenticate
 from django.contrib import messages
 from .models import Poste
 from django.views.generic import ListView 
+from .forms import EvenClub , EventSocial ,Stage ,Logement ,Transport ,Recommandation
 def index(request):
     return HttpResponse("run application")
 def profile(request) :
@@ -53,7 +54,31 @@ def login_view(request):
     else:
         form = LoginForm()
     return render(request, 'registration/login.html', {'form': form}) 
-# class ListePost(ListView):
-#      model = Poste 
-#      template_name = 'home.html'
-#      context_object_name = 'posts'  
+def transport(request):
+    form = Transport()
+    context = {'form': form}
+    return render(request, 'transport.html', context)
+
+
+def recommandation(request):
+    form = Recommandation()
+    context = {'form': form}
+    return render(request, 'recommandation.html', context)
+
+
+def eventSocial(request):
+    form = EventSocial()
+    context = {'form': form}
+    return render(request, 'eventSocial.html', context)
+
+
+def stage(request):
+    form = Stage()
+    context = {'form': form}
+    return render(request, 'Stage.html', context)
+
+
+def logement(request):
+    form = Logement()
+    context = {'form': form}
+    return render(request, 'logement.html', context)

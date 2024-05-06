@@ -1,6 +1,16 @@
 from django.db import models
 from datetime import date
 # Create your models here.
+ts = (
+    (1, 'ouvrier'),
+    (2, 'technicien'),
+    (3, 'PFE')
+)
+tp = (
+    (0, 'offre'),
+    (1, 'demmande')
+
+)
 # class User :
 class User(models.Model) :
     nom = models.CharField(max_length=50),
