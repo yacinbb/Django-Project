@@ -7,18 +7,18 @@
   />
   <style>
     .container {
+        /* margin-top: 40px; */
       width: 400px;
       margin: 0 auto;
-      /* margin-top: 40px; */
     }
   </style>
 </head>
 <div class="container">
-  <h1>Transport</h1>
+  <h1>Evenemnt</h1>
   <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">ajouter</button>
-</form> 
+</form>
 </div>
 {% endblock %}

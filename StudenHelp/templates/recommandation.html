@@ -14,7 +14,11 @@
   </style>
 </head>
 <div class="container">
-  <h2>Recommandation</h2>
-  {% csrf_token %} {% crispy form %}
+  <h1>Recommandation</h1>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">ajouter</button>
+</form>
 </div>
 {% endblock %}

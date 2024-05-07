@@ -13,8 +13,10 @@
 </head>
 <div class="container">
     <h2>eventClub</h2>
+    <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {% crispy form %}
-        
+        {{ form.as_p }}
+        <button type="submit">ajouter</button>
+    </form>
 </div>
 {% endblock %}

@@ -4,20 +4,37 @@ from django.contrib.auth import authenticate, login, logout
 from .forms import LoginForm
 from django.contrib.auth.decorators import login_required
 from .forms import UserRegistrationForm
-from .forms import EvenClub
+from .models import EvenClub , Poste
 from django.contrib.auth import login, authenticate
 from django.contrib import messages
-from .models import Poste
-from .forms import EvenClub , EventSocial ,Stage ,Logement ,Transport ,Recommandation , Poste
-from django.views.generic import ListView , CreateView , DetailView
-from django.urls import reverse_lazy
+from .forms import  Stage ,Logement ,Transport ,Recommandation
+from .forms import EvenClubForms , TransportForm , EvenementForm, RecommandationForm , StageForm ,LogementForm , EventSocialForm
+
 def index(request):
     return HttpResponse("run application")
-def profile(request) :
-    return render( request ,'profile.html')  
+
+def profile(request):
+    return render(request ,'profile.html')
+
 @login_required
 def home(request):
-    return render(request,'home.html')
+    posts = Poste.objects.all()
+    evenement_form = EvenementForm()
+    even_club_form = EvenClubForms()
+    transport_form =TransportForm()
+    recommandation_form = RecommandationForm()
+    stage_form = StageForm()
+    logement_form = LogementForm()
+    return render(request, 'home.html', {
+        'posts': posts,
+        'evenement_form': evenement_form,
+        'even_club_form': even_club_form,
+        'transport_form': transport_form,
+        'recommandation_form': recommandation_form,
+        'stage_form': stage_form,
+        'logement_form': logement_form,
+    })
+
 def register(request):
     if request.method == 'POST':
         form = UserRegistrationForm(request.POST)
@@ -30,15 +47,27 @@ def register(request):
     else:
         form = UserRegistrationForm()
     return render(request, 'registration/register.html', {'form': form})
+
 def logout_view(request):
     logout(request)
-    return redirect('index') 
-def choix(request) :
-    return render(request,'choix.html')  
+    return redirect('index')
+
+def choix(request):
+    return render(request, 'choix.html')
+
 def eventClub(request):
-    form = EvenClub()
-    context = {'form': form}
-    return render(request,'eventClub.html',context)
+    if request.method == 'POST':
+        form = EvenClubForms(request.POST , request.FILES)
+        if form.is_valid():
+            poste = form.save(commit=False)
+            poste.users_id = request.user.id
+            poste.save()
+            return redirect('home')
+    else:
+        form = EvenClubForms()
+
+    return render(request, 'eventClub.html', {'form': form})
+
 def login_view(request):
     if request.method == 'POST':
         form = LoginForm(data=request.POST)
@@ -50,38 +79,87 @@ def login_view(request):
                 login(request, user)
                 return redirect('home')
             else:
-
                 pass
     else:
         form = LoginForm()
-    return render(request, 'registration/login.html', {'form': form}) 
-def transport(request):
-    form = Transport()
-    context = {'form': form}
-    return render(request, 'transport.html', context)
+    return render(request, 'registration/login.html', {'form': form})
 
+def transport(request):
+    if request.method == 'POST':
+        form = TransportForm(request.POST , request.FILES)
+        if form.is_valid():
+            poste = form.save(commit=False)
+            poste.users_id = request.user.id
+            poste.save()
+            return redirect('home')
+    else:
+        form = TransportForm()
+
+    return render(request, 'transport.html', {'form': form})
 
 def recommandation(request):
-    form = Recommandation()
-    context = {'form': form}
-    return render(request, 'recommandation.html', context)
-def eventSocial(request):
-    form = EventSocial()
-    context = {'form': form}
-    return render(request, 'eventSocial.html', context)
-def stage(request):
-    form = Stage()
-    context = {'form': form}
-    return render(request, 'Stage.html', context)
-def post(self, request, *args, **kwargs):
-        form = self.get_form()
+    if request.method == 'POST':
+        form = RecommandationForm(request.POST , request.FILES)
         if form.is_valid():
-            return self.form_valid(form)
-        else:
-            return self.form_invalid(form)
-def logement(request):
-    form = Logement()
-    context = {'form': form}
-    return render(request, 'logement.html', context)
+            poste = form.save(commit=False)
+            poste.users_id = request.user.id
+            poste.save()
+            return redirect('home')
+    else:
+        form = RecommandationForm()
 
- 
+    return render(request, 'recommandation.html', {'form': form})
+def post(request) :
+    form = Poste()
+    context = {'form': form}
+    return render(request, 'post.html', context)
+def eventSocial(request):
+    if request.method == 'POST':
+        form = EventSocialForm(request.POST , request.FILES)
+        if form.is_valid():
+            poste = form.save(commit=False)
+            poste.users_id = request.user.id
+            poste.save()
+            return redirect('home')
+    else:
+        form = EventSocialForm()
+
+    return render(request, 'eventSocial.html', {'form': form})
+
+def stage(request):
+    if request.method == 'POST':
+        form = StageForm(request.POST , request.FILES)
+        if form.is_valid():
+            poste = form.save(commit=False)
+            poste.users_id = request.user.id
+            poste.save()
+            return redirect('home')
+    else:
+        form = StageForm()
+
+    return render(request, 'Stage.html', {'form': form})
+
+def logement(request):
+    if request.method == 'POST':
+        form = LogementForm(request.POST , request.FILES)
+        if form.is_valid():
+            poste = form.save(commit=False)
+            poste.users_id = request.user.id
+            poste.save()
+            return redirect('home')
+    else:
+        form = LogementForm()
+
+    return render(request, 'logement.html', {'form': form})
+def evenemnt(request):
+    if request.method == 'POST':
+        form = EvenementForm(request.POST , request.FILES)
+        if form.is_valid():
+            poste = form.save(commit=False)
+            poste.users_id = request.user.id
+            poste.save()
+            return redirect('home')
+    else:
+        form = EvenementForm()
+
+    return render(request, 'logement.html', {'form': form})
