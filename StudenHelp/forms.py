@@ -25,42 +25,45 @@ class UserRegistrationForm(UserCreationForm):
     helper.add_input(Submit('submit', 'Submit', css_class='btn-primary'))
     helper.form_method = 'POST'
 
-class PosteF(forms.Form):
-    image = forms.ImageField(label='image')
-    type = forms.IntegerField(label='type')
-    date = forms.DateField(label='date')
-    helper = FormHelper()
-    helper.add_input(Submit('submit', 'Submit', css_class='btn-primary'))
-    helper.form_method = 'POST'
-    fields = ['image' , 'type', 'date']
-class EvenClubForms(forms.ModelForm):
+class PosteForm(forms.ModelForm):
+    class Meta:
+        model = Poste
+        fields = ['image', 'type', 'date']
+
+class EvenClubForm(forms.ModelForm):
     class Meta:
         model = EvenClub
-        fields = ['intitule', 'description', 'lieu', 'contactinfo', 'club','image','type','date']
+        fields = ['intitule', 'description', 'lieu', 'contactinfo', 'club', 'image', 'type', 'date']
+
 class EvenementForm(forms.ModelForm):
     class Meta:
         model = Evenement
-        fields = ['intitule', 'description', 'lieu', 'contactinfo']
+        fields = ['intitule', 'description', 'lieu', 'contactinfo','image', 'type', 'date']
+
 class TransportForm(forms.ModelForm):
     class Meta:
         model = Transport
-        fields = ['depart', 'destination', 'heure_dep', 'nbre_sieges', 'contactinfo','image','type','date']
+        fields = ['depart', 'destination', 'heure_dep', 'nbre_sieges', 'contactinfo', 'image', 'type', 'date']
+
 class RecommandationForm(forms.ModelForm):
     class Meta:
         model = Recommandation
-        fields = ['text']
+        fields = ['text', 'image', 'type', 'date']
+
 class EventSocialForm(forms.ModelForm):
     class Meta:
         model = EvenSocial
-        fields = ['prix']
+        fields = ['prix', 'intitule', 'description', 'lieu', 'contactinfo', 'image', 'type', 'date']
+
 class StageForm(forms.ModelForm):
     class Meta:
         model = Stage
-        fields = ['specialite','typestg' ,'societe' , 'sujet' , 'contactinfo' ,'duree','image','type','date']
+        fields = ['specialite', 'typestg', 'societe', 'sujet', 'contactinfo', 'duree', 'image', 'type', 'date']
+
 class LogementForm(forms.ModelForm):
     class Meta:
         model = Logement
-        fields = ['image' , 'type', 'date' ,'localisation','description' ,'contactinfo']
+        fields = ['image', 'type', 'date', 'localisation', 'description', 'contactinfo']
 
 
 

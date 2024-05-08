@@ -51,7 +51,7 @@ class Stage(Poste):
     contactinfo = models.CharField(max_length=255)
     specialite = models.CharField(max_length=255)
     def __str__(self):
-        return "Stage - Type:"+ self.typestg +" Société: "+self.societe+" Durée: " +self.duree + " sujet "+self.sujet+" contact info "+self.contactinfo + "specilaiter " +self.specialite    
+        return "Stage - Type: " + str(self.typestg) + " Société: " + self.societe + " Durée: " + str(self.duree) + " sujet: " + self.sujet + " contact info: " + self.contactinfo + " spécialité: " + self.specialite
 class Evenement(Poste):
     intitule = models.CharField(max_length=255)
     description = models.CharField(max_length=255)

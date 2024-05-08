@@ -19,6 +19,6 @@ urlpatterns = [
     path('logement/', views.logement, name='logement'),
     path('transport/', views.transport, name='transport'),
     path('recommandation/', views.recommandation, name='recommandation'),
-    path('evenemnt/', views.evenemnt, name='evenmnt'),
+    path('evenemnt/', views.evenemnt, name='evenemnt'),
     path('post/' , views.post , name='post')
  ] + static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)

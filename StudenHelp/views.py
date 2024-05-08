@@ -7,8 +7,7 @@ from .forms import UserRegistrationForm
 from .models import EvenClub , Poste
 from django.contrib.auth import login, authenticate
 from django.contrib import messages
-from .forms import  Stage ,Logement ,Transport ,Recommandation
-from .forms import EvenClubForms , TransportForm , EvenementForm, RecommandationForm , StageForm ,LogementForm , EventSocialForm
+from .forms import  TransportForm , EvenementForm, RecommandationForm , StageForm ,LogementForm , EventSocialForm , PosteForm , EvenClubForm
 
 def index(request):
     return HttpResponse("run application")
@@ -20,7 +19,7 @@ def profile(request):
 def home(request):
     posts = Poste.objects.all()
     evenement_form = EvenementForm()
-    even_club_form = EvenClubForms()
+    even_club_form = EvenClubForm()
     transport_form =TransportForm()
     recommandation_form = RecommandationForm()
     stage_form = StageForm()
@@ -57,14 +56,14 @@ def choix(request):
 
 def eventClub(request):
     if request.method == 'POST':
-        form = EvenClubForms(request.POST , request.FILES)
+        form = EvenClubForm(request.POST , request.FILES)
         if form.is_valid():
             poste = form.save(commit=False)
             poste.users_id = request.user.id
             poste.save()
             return redirect('home')
     else:
-        form = EvenClubForms()
+        form = EvenClubForm()
 
     return render(request, 'eventClub.html', {'form': form})
 
@@ -110,9 +109,17 @@ def recommandation(request):
 
     return render(request, 'recommandation.html', {'form': form})
 def post(request) :
-    form = Poste()
-    context = {'form': form}
-    return render(request, 'post.html', context)
+    if request.method == 'POST':
+        form = PosteForm(request.POST , request.FILES)
+        if form.is_valid():
+            poste = form.save(commit=False)
+            poste.users_id = request.user.id
+            poste.save()
+            return redirect('home')
+    else:
+        form = PosteForm()
+
+    return render(request, 'post.html', {'form': form})
 def eventSocial(request):
     if request.method == 'POST':
         form = EventSocialForm(request.POST , request.FILES)
@@ -137,7 +144,7 @@ def stage(request):
     else:
         form = StageForm()
 
-    return render(request, 'Stage.html', {'form': form})
+    return render(request, 'stage.html', {'form': form})
 
 def logement(request):
     if request.method == 'POST':
@@ -153,7 +160,7 @@ def logement(request):
     return render(request, 'logement.html', {'form': form})
 def evenemnt(request):
     if request.method == 'POST':
-        form = EvenementForm(request.POST , request.FILES)
+        form = EvenementForm(request.POST, request.FILES)
         if form.is_valid():
             poste = form.save(commit=False)
             poste.users_id = request.user.id
@@ -162,4 +169,4 @@ def evenemnt(request):
     else:
         form = EvenementForm()
 
-    return render(request, 'logement.html', {'form': form})
+    return render(request, 'evenemnt.html', {'form': form})
