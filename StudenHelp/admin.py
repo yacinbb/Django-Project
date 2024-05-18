@@ -10,7 +10,7 @@ from .models import EvenClub
 from .models import EvenSocial
 from .models import Reaction
 # Register your models here.
-admin.site.register(User)
+
 admin.site.register(Poste)
 admin.site.register(Recommandation)
 admin.site.register(Transport)

@@ -6,19 +6,17 @@
     href="https://bootswatch.com/5/litera/bootstrap.min.css"
   />
   <style>
-    .container{
-        /* margin-top: 40px; */
-        width: 400px;
-        margin: 0 auto;
+    .container {
+      /* margin-top: 40px; */
+      width: 400px;
+      margin: 0 auto;
+      color: rgb(215, 49, 30);
     }
   </style>
 </head>
 <div class="container">
-    <h2>Create Post</h2>
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Ajouter</button>
-    </form>
+  <h2>Create Post</h2>
+
+  {% csrf_token %} {% crispy form %}
 </div>
 {% endblock %}

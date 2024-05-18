@@ -7,19 +7,15 @@
   />
   <style>
     .container {
-    /* margin-top: 40px; */
+      /* margin-top: 40px; */
       width: 400px;
       margin: 0 auto;
     }
-   
   </style>
 </head>
 <div class="container">
   <h1>Logement</h1>
-  <form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">ajouter</button>
-</form>
+
+  {% csrf_token %} {% crispy form %}
 </div>
 {% endblock %}
